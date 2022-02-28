@@ -1,0 +1,16 @@
+django-environ==0.8.1
+grpcio
+numpy
+authlib
+requests
+pandas
+sqlalchemy
+cloud-sql-python-connector[pg8000]
+pg8000
+sky-api-python-client
+google-cloud-secret-manager
+google-cloud-storage
+gspread==5.2.0
+matplotlib
+tox
+pytest

@@ -1,0 +1,26 @@
+name: skydb
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - grpcio
+  - numpy
+  - authlib
+  - requests
+  - pandas
+  - notebook
+  - gspread
+  - sqlalchemy
+  - cloud-sql-python-connector[pg8000]
+  - pg8000
+  - matplotlib
+  - twine
+  - pip:
+    - python-dotenv
+    - sky-api-python-client
+    - google-cloud-secret-manager
+    - django-environ
+    - tox
+    -pytest
+  
