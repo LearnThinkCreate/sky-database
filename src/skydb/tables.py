@@ -19,7 +19,8 @@ student_table = Table(
     Column('last_name', VARCHAR),
     Column('preferred_name', VARCHAR),
     Column('grade_level', VARCHAR, index=True),
-    Column('counselor', VARCHAR)
+    Column('counselor', VARCHAR),
+    Column('birth_date', TIMESTAMP, nullable=True)
 )
 
 academic_enrollment_table = Table(
@@ -124,6 +125,7 @@ historic_grade_table = Table(
     Column('term', VARCHAR, nullable=True),
     Column('user_id', ForeignKey('tp_students.id')),
     Column('weight', FLOAT),
+    Column('transcript_category', VARCHAR(30), nullable=True),
     PrimaryKeyConstraint('user_id', 'offering_id', 'course_title', 'term', 'school_year', name='historic_grade_pk')
 )
 

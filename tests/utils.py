@@ -34,7 +34,7 @@ def getStudents():
     clean_students = students[[
         'id', 'student_id', 'first_name', 'last_name',
         'preferred_name', 'student_info.grade_level',
-        'custom_field_one', 
+        'custom_field_one', 'birth_date'
     ]].rename(columns={
         'student_info.grade_level':'grade_level',
         'custom_field_one':'counselor',
@@ -42,7 +42,8 @@ def getStudents():
         'id':'int64',
         'grade_level':'int32'
     })
-
+    
+    clean_students.birth_date = pd.to_datetime(clean_students.birth_date, errors = 'coerce')
     clean_students.student_id = pd.to_numeric(clean_students.student_id, errors='coerce')
 
     clean_students = clean_students.astype(object).where(pd.notnull(clean_students), None)
