@@ -1,14 +1,14 @@
 # skydb
 
-# About
+## About
 
 Library for creating and maintaining k-12 data in conjunction with the Blackbaud information system.
 
-# Goals 
+## Goals 
 
 Create library for setting up and maintaining Tampa Preparatory school's data warehouse with latest data from Blackbaud.
 
-# Examples
+## Examples
 
 ``` Python
 from utils import getStudents
@@ -59,7 +59,7 @@ updateSpreadsheet(getStudents().fillna(''),
                  )
 ```
 
-# Connection Classes & sqlalchemy
+## Connection Classes & sqlalchemy
 
 In order to set up and update the database I elected to use [sqlalchemy](https://docs.sqlalchemy.org/en/14/tutorial/index.html). 
 
