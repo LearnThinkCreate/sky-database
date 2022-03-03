@@ -2,11 +2,62 @@
 
 # About
 
-Library for creating and maintaing k-12 data in conjuction with the Blackbaud information system.
+Library for creating and maintaining k-12 data in conjunction with the Blackbaud information system.
 
 # Goals 
 
 Create library for setting up and maintaining Tampa Preparatory school's data warehouse with latest data from Blackbaud.
+
+# Examples
+
+``` Python
+from utils import getStudents
+from skydb.tables import student_table, metadata_obj
+from skydb.classes import Student
+from skydb.sheets import *
+from skydb.connections import GooglePsqlConnection
+from skydb.sheets.style import BaseStyle
+from gspread_formatting import *
+
+# Creating a single table 
+student_table.create(GooglePsqlConnection().init_db_engine())
+
+# Dropping a table
+student_table.drop(GooglePsqlConnection().init_db_engine())
+
+# Creating all the tables 
+metadata_obj.create_all(GooglePsqlConnection().init_db_engine())
+
+# Reading a spreadsheet
+counselors = readSpreadsheet(sheet_name='Tampa Prep Counselors')
+
+# Creating a google sheets style class
+class HysonFireStyle(BaseStyle):
+    def style(self, ncol=100):
+        set_frozen(self.worksheet, rows=1, cols=2)
+        """ Body """
+        self.worksheet.format(':', {
+                'horizontalAlignment': 'CENTER',
+                'textFormat':{
+                    'fontSize': 14
+                },
+            #  'wrapStrategy': 'WRAP',
+            })
+
+        """ Header """
+        # Bold
+        self.worksheet.format('1:', {'textFormat': {'bold': True, 'fontSize':12}})
+        # Background color
+        self.worksheet.format('1:', self.mplColorConverter(color='lightgrey'))
+
+        self.worksheet.columns_auto_resize(0, ncol)
+        
+# Updating a spreadsheet with a custom class
+updateSpreadsheet(getStudents().fillna(''), 
+                  sheet_name='Student Spreadsheet',
+                  styleClass=HysonFireStyle
+                 )
+```
 
 # Connection Classes & sqlalchemy
 
@@ -79,7 +130,7 @@ class Student(Base):
 Inspired by [this guide](https://levelup.gitconnected.com/python-pandas-google-spreadsheet-476bd6a77f2b) on using pandas and gspread, 
 this script provides 3 helper functions that make working with Google Sheets 
 really easy -- `readSpreadsheet`, `updateSpreadsheet`, and `createSpreadsheet`. 
-I'ved also added style classes into the mix in order to provide some flair.
+I've also added style classes into the mix in order to provide some flair.
 
 These functions are just convenient wrappers around the [gspread library](https://docs.gspread.org/en/latest/oauth2.html). 
 I highly recommend checking out these resources if you'd like to use Google Sheets and Python as a part of your 
