@@ -74,7 +74,7 @@ There are 4 main steps in creating/maintaining a database with sqlalchemy
 6. [The update function](https://github.com/LearnThinkCreate/sky-database/blob/main/src/skydb/update.py)
 
 
-## DB Tables
+## skydb.tables
 
 ``` Python
 # Object for creating each table
@@ -94,7 +94,7 @@ student_table = Table(
 )
 ```
 
-## DB Classes
+## skydb.classes
 
 
 ``` Python  
