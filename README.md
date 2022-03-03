@@ -64,7 +64,7 @@ updateSpreadsheet(getStudents().fillna(''),
 In order to set up and update the database I elected to use [sqlalchemy](https://docs.sqlalchemy.org/en/14/tutorial/index.html). 
 
 There are 4 main steps in creating/maintaining a database with sqlalchemy
-1. [The engine]https://github.com/LearnThinkCreate/sky-database/blob/main/src/skydb/connections.py)
+1. [The engine](https://github.com/LearnThinkCreate/sky-database/blob/main/src/skydb/connections.py)
     1. [sqlalchemy docs](https://docs.sqlalchemy.org/en/14/tutorial/engine.html)
     2. To create a standard method for connecting and updating the data, I've used connection classes
 2. [The tables](https://github.com/LearnThinkCreate/sky-database/blob/main/src/skydb/tables.py)
