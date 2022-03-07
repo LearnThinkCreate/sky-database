@@ -148,24 +148,6 @@ student_gpa_table = Table(
     Column('weighted_gpa', FLOAT)
 )
 
-final_grade_tables = Table(
-    "tp_final_grades",
-    metadata_obj,
-    Column('user_id', ForeignKey("tp_students.id")),
-    Column('section_id', ForeignKey('tp_sections.id')),
-    Column('grade', VARCHAR),
-    Column('term', VARCHAR),
-    Column('grade_plan', VARCHAR),
-    Column('course_code', VARCHAR),
-    Column('course_title', VARCHAR),
-    Column('department_name', VARCHAR),
-    Column('teacher_last', VARCHAR),
-    Column('teacher_first', VARCHAR),
-    Column('teacher_id', VARCHAR),
-    Column('comment', TEXT),
-    PrimaryKeyConstraint('user_id', 'section_id', 'term', 'grade_plan', name='final_grade_pk')
-)
-
 attendance_table = Table(
     'tp_attendance',
     metadata_obj,
