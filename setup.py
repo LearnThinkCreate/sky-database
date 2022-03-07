@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="skydb",
-    version='0.1.1',
+    version='0.1.3',
     author='Warren Hyson',
     author_email='warren.hyson5@gmail.com',
     description="For maintinaing Tampa Prep Data Warehouse",

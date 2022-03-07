@@ -18,7 +18,6 @@ class Student(Base):
     historic_grades = relationship('HistoricGrades', back_populates='student', cascade='delete')
     gpa = relationship('GPA', back_populates='student', cascade='delete')
     psat_score = relationship('Psat', back_populates='student', cascade='delete')
-    final_grades = relationship('FinalGrades', back_populates='student', cascade='delete')
     absences = relationship('Attendance', back_populates='student', cascade='delete')
 
     def __repr__(self):
@@ -49,7 +48,6 @@ class Section(Base):
 
     course_info = relationship('Course', back_populates='sections')
     teacher = relationship('Teacher', back_populates='classes')
-    final_grades = relationship('FinalGrades', back_populates='section')
     gradebook_grades = relationship('GradebookGrades', back_populates='section')
     enrollment = relationship('AcademicEnrollment', back_populates='section')
 
@@ -128,16 +126,6 @@ class Psat(Base):
 
     def __repr__(self):
         return f"Psat({self.user_id!r} - {self.total_score!r})"
-
-
-class FinalGrades(Base):
-    __table__ = final_grade_tables
-
-    section = relationship('Section', back_populates='final_grades')
-    student = relationship('Student', back_populates='final_grades')
-
-    def __repr__(self):
-        return f"FinalGrades({self.user_id!r} - {self.course_title!r} ({self.term!r}) - Grade: {self.grade!r})"
 
 
 class Attendance(Base):

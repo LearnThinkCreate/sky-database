@@ -1,7 +1,18 @@
+import os
 import pandas as pd
 import gspread
 from .style import HysonStyle
 from gspread.exceptions import WorksheetNotFound
+
+
+
+def _get_gc():
+    SERVICE_ACCOUNT = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+    if SERVICE_ACCOUNT:
+        gc = gspread.service_account(filename=SERVICE_ACCOUNT)
+    else:
+        gc = gspread.service_account()
+    return gc
 
 def readSpreadsheet(
     sheet_name = None,
@@ -9,14 +20,12 @@ def readSpreadsheet(
     tab_index = 0,
     ):
     
-    gc = gspread.service_account()
-    
     if sheet_name:
-        gc = gc.open(sheet_name)
+        sheet = _get_gc().open(sheet_name)
     else:
-        gc = gc.open_by_key(sheet_id)
+        sheet = _get_gc().open_by_key(sheet_id)
     
-    values = gc.get_worksheet(tab_index).get_all_values()
+    values = sheet.get_worksheet(tab_index).get_all_values()
     
     df = pd.DataFrame(values)
     df.columns = df.iloc[0]
@@ -32,13 +41,10 @@ def updateSpreadsheet(
     tab_name = None,
     styleClass = HysonStyle
     ):
-    
-    gc = gspread.service_account()
-    
     if sheet_name:
-        sheet = gc.open(sheet_name)
+        sheet = _get_gc().open(sheet_name)
     else:
-        sheet = gc.open_by_key(sheet_id)
+        sheet = _get_gc().open_by_key(sheet_id)
     
     try:
         if tab_name:
@@ -70,9 +76,7 @@ def createSpreadsheet(
         role='writer',
         perm_type='user'
     ):
-    gc = gspread.service_account()
-    
-    sheet = gc.create(sheet_name)
+    sheet = _get_gc().create(sheet_name)
 
     # Applying Basic Styling
     worksheet = sheet.sheet1
